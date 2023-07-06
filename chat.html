@@ -49,13 +49,13 @@
             con.start();
 
             //define subscribe method newMessage
-            prox.on("newMessage", function (n, m) {
-                $("ul").append("<li>" + n + " : " + m + "</li>")
+            prox.on("newMessage", function (m) {
+                $("ul").append("<li>" + m.Name + "send : " + m.MessageContent + " in time" + m.Date +"</li>")
             })
         })
 
         function send() {
-            prox.invoke("sendMessage", name, $("#txt").val())
+            prox.invoke("sendMessage", { Name: name, MessageContent: $("#txt").val() })
         }
 
     </script>

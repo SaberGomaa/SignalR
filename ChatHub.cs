@@ -11,14 +11,14 @@ namespace SignalR
     [HubName("chat")]
     public class ChatHub : Hub
     {
-        public void sendMessage(string name ,string message)
+        public void sendMessage(Message m)
         {
             myContext Context = new myContext();
-            Message m = new Message (){MessageContent = message , Name = name  };
+            //Message m = new Message (){MessageContent = message , Name = name  };
             Context.Messages.Add(m);
             Context.SaveChanges();  
 
-            Clients.Others.newMessage(name, message);
+            Clients.Others.newMessage(m);
         }
     }
 }
