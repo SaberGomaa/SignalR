@@ -6,7 +6,9 @@
     <script src="Scripts/jquery-1.6.4.js"></script>
     <script src="Scripts/jquery.signalR-2.4.3.min.js"></script>
     
-    <!-- load proxy file -->
+
+    <!-- default proxy -->
+     <!--load proxy file 
     <script src="/signalr/hubs"></script>
     <script>
         $(function () {
@@ -30,7 +32,35 @@
             prox.server.sendMessage(name, $("#txt").val())
         }
 
+    </script>-->
+
+    <!-- Defined Proxy -->
+    <script>
+        var prox;
+        $(function () {
+            name = prompt("Enter Your Name")
+            // define Connection
+            var con = $.hubConnection();
+
+            // Create Proxy
+            prox = con.createHubProxy("chat");
+
+            // start Connection
+            con.start();
+
+            //define subscribe method newMessage
+            prox.on("newMessage", function (n, m) {
+                $("ul").append("<li>" + n + " : " + m + "</li>")
+            })
+        })
+
+        function send() {
+            prox.invoke("sendMessage", name, $("#txt").val())
+        }
+
     </script>
+
+
 </head>
 <body>
     <input type="text" id="txt"/>
