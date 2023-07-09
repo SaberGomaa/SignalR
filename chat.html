@@ -50,21 +50,33 @@
 
             //define subscribe method newMessage
             prox.on("newMessage", function (m) {
-                $("ul").append("<li>" + m.Name + "send : " + m.MessageContent + " in time" + m.Date +"</li>")
+                $("ul").append("<li>" + m.Name + " send : " + m.MessageContent + " in time " + m.Date +"</li>")
+            })
+            prox.on("newMember", function (name, groupName) {
+                $("ul").append("<li>" + name + " Joined for " + groupName + " Group"+ "</li>")
             })
         })
 
         function send() {
             prox.invoke("sendMessage", { Name: name, MessageContent: $("#txt").val() })
         }
-
+        function join() {
+            prox.invoke("joinGroup", $("#gtxt").val(), name)
+        }
     </script>
 
 
 </head>
 <body>
-    <input type="text" id="txt"/>
+    <input type="text" id="txt" />
     <button onclick="send()">send</button>
+    <br />
+    <br />
+    
+    <input type="text" id="gtxt" />
+    <button onclick="join()">Join</button>
+
+    <br />
     <ul>
         <li>messages</li>
     </ul>

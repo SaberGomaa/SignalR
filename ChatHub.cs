@@ -20,5 +20,11 @@ namespace SignalR
 
             Clients.Others.newMessage(m);
         }
+
+        public void joinGroup(string groupName , string name)
+        {
+            Groups.Add(Context.ConnectionId, groupName);
+            Clients.OthersInGroup(groupName).newMember(name, groupName);
+        }
     }
 }
