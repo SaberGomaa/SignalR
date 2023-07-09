@@ -52,9 +52,16 @@
             prox.on("newMessage", function (m) {
                 $("ul").append("<li>" + m.Name + " send : " + m.MessageContent + " in time " + m.Date +"</li>")
             })
+
             prox.on("newMember", function (name, groupName) {
                 $("ul").append("<li>" + name + " Joined for " + groupName + " Group"+ "</li>")
             })
+
+            prox.on("sendMessage", function (name, message, groupName) {
+                $("ul").append("<li>" + name + " send " + message + " for " + groupName + " Group"+ "</li>")
+            })
+
+
         })
 
         function send() {
@@ -63,6 +70,11 @@
         function join() {
             prox.invoke("joinGroup", $("#gtxt").val(), name)
         }
+
+        function sendGroup() {
+            prox.invoke("sendGroupMessage", $("#gname").val(), $("#msg").val(), name)
+        }
+
     </script>
 
 
@@ -72,9 +84,15 @@
     <button onclick="send()">send</button>
     <br />
     <br />
-    
+
     <input type="text" id="gtxt" />
     <button onclick="join()">Join</button>
+
+    <br />
+    <input type="text" id="msg" placeholder="message"/>
+    <br />
+    <input type="text" id="gname" placeholder="group Name" />
+    <button onclick="sendGroup()">Send For Group</button>
 
     <br />
     <ul>
