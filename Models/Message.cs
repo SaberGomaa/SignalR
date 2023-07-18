@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace SignalR.Models
 {
@@ -11,5 +8,6 @@ namespace SignalR.Models
         public DateTime  Date { get; set; } = DateTime.Now;
         public string Name { get; set; }
         public string MessageContent { get; set; }
+
     }
 }

@@ -20,13 +20,11 @@ namespace SignalR
 
             Clients.Others.newMessage(m);
         }
-
         public void joinGroup(string groupName , string name)
         {
             Groups.Add(Context.ConnectionId, groupName);
             Clients.OthersInGroup(groupName).newMember(name, groupName);
         }
-
         public void sendGroupMessage(string groupName , string message , string name) 
         {
             Clients.OthersInGroup(groupName).sendMessage(name, message , groupName);
